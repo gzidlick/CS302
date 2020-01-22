@@ -1,7 +1,12 @@
 /*Gauge Zidlick,lib_info.cpp
  * Project 1: Write a program that takes a text file 
  * containing information about a music library
- * and organize it according to musician, album, and track numbers. */
+ * and organize it according to musician, album, and track numbers. 
+ *
+ * I used http://www.cplusplus.com/reference/map/map/ to refresh myself on how maps worked and their member functions
+ * I used a previous lab from a cs140 to refresh myself on iterators and 'this->' http://web.eecs.utk.edu/~bvanderz/cs140/Labs/Lab7/
+ *
+ * */
 #include <map>
 #include <string>
 #include <fstream>

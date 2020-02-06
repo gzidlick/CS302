@@ -14,4 +14,5 @@ List::~List() {
 		delete current;
 		current = nxt;
 	}
+	delete current;
 }

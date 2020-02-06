@@ -5,79 +5,142 @@
 #include <iostream>
 // Prototypes
 
-Node *msort(Node *head, bool numeric);
-void  split(Node *head, Node *&left, Node *&right);
-Node *merge(Node *left, Node *right,Node *sorting,bool numeric);
+void mergesort(Node* arr[],int low,int high);
+void merge(Node* arr[],int low,int middle,int high);
+void mergesort_S(Node* arr[],int low,int high);
+void merge_S(Node* arr[],int low,int middle,int high);
+
+//Node *msort(Node *head, bool numeric);
+//void  split(Node *head, Node *&left, Node *&right);
+//Node *merge(Node *left, Node *right,Node *sorting,bool numeric);
 
 // Implementations
 
 void merge_sort(List &l, bool numeric) {
-
-}
-
-Node *msort(Node *head, bool numeric) {
-	if((head == NULL) || (head->next = NULL)){
-		return head;
+	Node* current = l.head;
+	Node* array[l.size];
+	for(unsigned int i = 0;i<l.size;i++){
+		array[i] = current;
+		current = current->next;
 	}
-	Node *l,*r, *newNode; 
-	split(head,l,r);
-	cout << "sorting" << endl;
-	l = msort(l,numeric);
-	r = msort(r,numeric);
-	cout << "exiting msort" << endl;
-	return merge(l,r,newNode,numeric);
-}
-
-void split(Node *head, Node *&left, Node *&right) {
-	Node *tortoise;
-	Node *hare;
-	tortoise = head;
-	hare = head->next;
-
-	while(hare != NULL){
-		hare = hare->next;
-		if(hare != NULL){
-			tortoise = tortoise->next;
-			hare = hare->next;
-		}
+	if(numeric){
+		mergesort(array,0,l.size-1);
+	}
+	else{
+		mergesort_S(array,0,l.size-1);
+	}
+	for(unsigned int i = 0;i<l.size-1;i++){
+		array[i]->next = array[i+1];
 	}
 
-	left = head;
-	right = tortoise->next;
-	tortoise->next = NULL;
+	array[l.size-1]->next = NULL;
+	l.head = array[0];
 
 }
+void mergesort(Node *arr[],int low, int high){	
+	if(high > low){
+		int middle = (low+high)/2;
+		//recur on left side
+		mergesort(arr,low,middle);
+		//recur on right side
+		mergesort(arr,middle+1,high);
+		merge(arr,low,middle,high);
+	}
+}
+//"conquer" portion - create a temp array that adds the elements in order
+//by comparing the left side with the right side and placing the smaller one to the left
+void merge(Node *arr[],int low,int middle,int high){
+	int i = low,j = middle+1,k = 0;
+	Node *t[high-low+1];
 
-Node *merge(Node *left, Node *right,Node *sorting,bool numeric) {
-	Node *newHead = NULL;
-	if(left == NULL) return left;
-	if(right == NULL) return right;
-	if(left && right){
-		if(left->number <= right->number){
-			sorting = left;
-			left = sorting->next;
+	//iterate through left and right side of array checking for lesser element
+	while(i<=middle && j<=high){
+		//lesser element goes to the left, greater element goes to the right
+		//k keeps track of index in temp array while i and j keeps track of index
+		//in their respective side of the array
+		if(arr[i]->number <= arr[j]->number){
+			t[k] = arr[i];
+			k++;
+			i++;
 		}
 		else{
-			sorting = right;
-			right = sorting->next;
+			t[k] = arr[j];
+			k++;
+			j++;
 		}
-		newHead = sorting;
 	}
-	while(left && right){
-		if(left->number <= right->number){
-			sorting->next = left;
-			sorting = left;
-			left = sorting->next;
+	//if there are any more elements in the left side add them to 
+	//temp array
+	while(i <= middle){
+		t[k] = arr[i];
+		k++;
+		i++;
+	}
+	//if there are any more elements in the right side add them to
+	//temp array
+	while(j <= high){
+		t[k] = arr[j];
+		k++;
+		j++;
+	}
+	//copy temp array to orginal array
+	for(i = low;i<=high;i++){
+		arr[i] = t[i-low];
+	}
+
+
+}
+//"_S" functions work the same they just compare strings instead of ints
+void mergesort_S(Node *arr[],int low, int high){	
+	if(high > low){
+		int middle = (low+high)/2;
+		mergesort_S(arr,low,middle);
+		mergesort_S(arr,middle+1,high);
+		merge_S(arr,low,middle,high);
+	}
+}
+void merge_S(Node *arr[],int low,int middle,int high){
+	int i = low,j = middle+1,k = 0;
+	Node *t[high-low+1];
+
+	while(i<=middle && j<=high){
+		if(arr[i]->string.compare(arr[j]->string) <= 0){
+			t[k] = arr[i];
+			k++;
+			i++;
 		}
 		else{
-			sorting->next = right;
-			sorting = right;
-			right = sorting->next;
+			t[k] = arr[j];
+			k++;
+			j++;
 		}
 	}
-	if(left == NULL) sorting->next = right;
-	if(right == NULL) sorting->next = left;
-	cout << "exit merge" << endl;
-	return newHead;
+	while(i <= middle){
+		t[k] = arr[i];
+		k++;
+		i++;
+	}
+	while(j <= high){
+		t[k] = arr[j];
+		k++;
+		j++;
+	}
+	for(i = low;i<=high;i++){
+		arr[i] = t[i-low];
+	}
+
+
 }
+
+/*
+   Node *msort(Node *head, bool numeric) {
+
+   }
+
+   void split(Node *head, Node *&left, Node *&right) {
+   }
+
+   Node *merge(Node *left, Node *right,Node *sorting,bool numeric) {
+
+   }*/
 

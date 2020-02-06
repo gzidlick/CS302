@@ -44,5 +44,4 @@ Gauge Zidlick https://github.com/gzidlick/CS302/edit/master/proj2/
 2c. Out of the choices, I would choose quick sort because it works well with small lists and the average time scales well as lists get bigger and bigger.
 
 
-
 3. I worked solo on this project. I understand that in my quick sort implementation I was not supposed to use arrays to implement the sort, I wanted to demonstrate that I understood how the algorithm worked in order to try and get partial credit. I had a hard time managing pointers in my utility functions, my main issue was that pointers kept getting lost and I did not know the reason. I had the same issues with merge sort, however at this time I am not able to implement it using arrays in order to show my understanding.

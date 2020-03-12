@@ -1,0 +1,22 @@
+8
+d 7
+i 15
+j 6
+k 19
+s 12
+t 18
+r 14
+a 18
+10 10
+s t s k i t k d s t 
+j s k j s j d t t s 
+j i t t j j s s j d 
+j d d d i t k t k t 
+j t j k t d k d k k 
+s k j i j s k s k k 
+s t s j k k i s d j 
+j j j s s i j i i t 
+j k j t s j i d d j 
+k s i t i j k d t k 
+0 0
+9 9

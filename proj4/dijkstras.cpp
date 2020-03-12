@@ -168,16 +168,22 @@ int main(int argc, char *argv[]) {
 		start = grid[startrow][startcol];
 		start->distance = 0;
 		start->spot_in_mm = queue.insert(make_pair(start->distance,start));
-
+		
+		//Dijkstras
 		while(target->visited == false){
+			//pop off front of map and mark visited
 			n = queue.begin()->second;
 			n->visited = true;
 			queue.erase(n->spot_in_mm);	
+			//check adjacent nodes
 			for(unsigned int i = 0;i<n->adj.size();i++){
 				distance = n->distance;
+				//check to see if its been visited
 				if(n->adj[i]->visited == false){
 					distance += n->weight;
+					//if the nodes distance is -1 or less than the current distance
 					if(n->adj[i]->distance == -1 || distance < n->adj[i]->distance){
+						//if node is in map remove from map
 						if(n->adj[i]->spot_in_mm != queue.end()){
 							queue.erase(n->adj[i]->spot_in_mm);
 						}

@@ -1,3 +1,6 @@
+//Gauge Zidlick generate-map.cpp
+//Project 4 generate-map.cpp - create a program that makes an NxN map
+
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>

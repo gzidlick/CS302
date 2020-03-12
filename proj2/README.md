@@ -1,5 +1,6 @@
 # CS302/proj2
 Gauge Zidlick https://github.com/gzidlick/CS302/edit/master/proj2/
+
 1.
 
 | Mode    | Size     | Elapsed Time  |
